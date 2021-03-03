@@ -81,3 +81,25 @@ python get-pip.py
 # -- }}}
 
 mkdir -p ~/.config
+
+# -- Editor installation -- {{{
+
+# Syntax: "cask" "Label" \
+local -A editor_options=(\
+    "atom" "Atom"\
+    "sublime-text" "Sublime Text"\
+    "phpstorm" "PHPStorm"\
+)
+
+for key value in ${(@kv)editor_options}; do
+    read response\?"Install editor $value? [y/n] "
+    case "$response" in
+        [yY][eE][sS]|[yY])
+            echo "Running: brew install --cask $key";
+            brew install --cask $key;
+            ;;
+        *)
+            ;;
+    esac
+done
+# -- }}}
